@@ -72,7 +72,7 @@ const TodoList = () => {
     <div id="todoListPage" className="bg-half">
       <nav>
         <h1>
-          <a href="/#">ONLINE TODO LIST</a>
+          <a href="#!">ONLINE TODO LIST</a>
         </h1>
       </nav>
       <div className="conatiner todoListPage vhContainer">
@@ -89,7 +89,7 @@ const TodoList = () => {
               {tabList.map((x, idx) => {
                 return (
                   <li key={idx} onClick={clickTab}>
-                    <a href="/#" className={x.isActive ? "active" : ""}>
+                    <a href="#!" className={x.isActive ? "active" : ""}>
                       {x.name}
                     </a>
                   </li>
@@ -119,7 +119,7 @@ const TodoList = () => {
                   }
                   個已完成項目
                 </p>
-                <a href="/#" onClick={removeAllCompleteItem}>
+                <a href="#!" onClick={removeAllCompleteItem}>
                   清除已完成項目
                 </a>
               </div>
