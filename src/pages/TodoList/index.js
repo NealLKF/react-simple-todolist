@@ -115,10 +115,10 @@ const TodoList = () => {
                   <p>
                     {
                       dataList.filter((x) => {
-                        return x.isDone;
+                        return !x.isDone;
                       }).length
                     }
-                    個已完成項目
+                    個未完成項目
                   </p>
                   <a href="#!" onClick={removeAllCompleteItem}>
                     清除已完成項目

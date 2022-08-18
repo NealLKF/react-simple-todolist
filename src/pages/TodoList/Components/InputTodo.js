@@ -10,6 +10,7 @@ const InputTodo = ({ oriDataList, setOriDataList, renderList }) => {
     };
     const { register, handleSubmit } = useForm();
     const AddNewTodo = (data) => {
+      console.log(data);
     renderList.current = true;
       setOriDataList([
         { ...data, ikey: v4(), isDone: false },
@@ -28,9 +29,7 @@ const InputTodo = ({ oriDataList, setOriDataList, renderList }) => {
           onChange={ChangeNewTodo}
         />
         <button type="submit">
-          <a href="#!">
             <i className="fa fa-plus"></i>
-          </a>
         </button>
       </form>
     );
