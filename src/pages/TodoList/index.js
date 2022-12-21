@@ -72,6 +72,7 @@ const TodoList = () => {
     <div id="todoListPage" className="bg-half">
       <nav>
         <h1>
+        {`Author: Neal`}
           <a href="#!">ONLINE TODO LIST</a>
         </h1>
       </nav>
