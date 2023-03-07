@@ -1,10 +1,13 @@
 import './index.css';
 import { useState, useEffect, useRef } from "react";
 import { v4 } from "uuid";
-import InputTodo from './Components/InputTodo'
-import TodoItem from './Components/TodoItem'
+import InputTodo from './Components/InputTodo';
+import TodoItem from './Components/TodoItem';
 
-const TodoList = () => {
+const TodoList = ({ toast }) => {
+  const showToastMessage = (msg) => {
+    toast.success(msg);
+  };
   const [tabList, setTabList] = useState([
     { name: "全部", isActive: true, isDoneCondition: null },
     { name: "待完成", isActive: false, isDoneCondition: false },
@@ -24,6 +27,7 @@ const TodoList = () => {
   };
   const filterTodoList = () => {
     console.log('filterTodoList');
+
     const isDoneFilter = tabList.filter((x) => {
       return x.isActive;
     })[0].isDoneCondition;
@@ -52,12 +56,34 @@ const TodoList = () => {
     { ikey: v4(), note: "約ada禮拜四吃晚餐", isDone: false }
   ]);
 
+  const usePrevious = (value) => {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    }, [value]);
+    return ref.current;
+  }
+  const prevoriDataList = usePrevious(oriDataList.length);
+
   const renderList = useRef(false);
   //初始化清單內容
   useEffect(() => {
     if (!renderList.current) { return; }
     filterTodoList();
-  }, [tabList, oriDataList]);
+  }, [tabList]);
+
+  useEffect(() => {
+    if (!renderList.current) { return; }
+    filterTodoList();
+    if (oriDataList.length > prevoriDataList) {
+      showToastMessage('Add todolist done.');
+    } else if (oriDataList.length < prevoriDataList) {
+      showToastMessage('Delete todolist done.');
+    } else {
+      showToastMessage('Update todolist done.');
+    } 
+  }, [oriDataList]);
+
   const [dataList, setDataList] = useState(oriDataList);
   const removeAllCompleteItem = () => {
     renderList.current = true;
@@ -72,7 +98,7 @@ const TodoList = () => {
     <div id="todoListPage" className="bg-half">
       <nav>
         <h1>
-        {`Author: Neal`}
+          {`Author: Neal`}
           <a href="#!">ONLINE TODO LIST</a>
         </h1>
       </nav>
